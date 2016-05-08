@@ -1,7 +1,6 @@
 import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 public class ControlPanel extends JPanel {
 	
@@ -9,19 +8,13 @@ public class ControlPanel extends JPanel {
 	{
 		super();
 		this.addButtons();
-		this.setLeft();
 	}
 	
 	public void addButtons()
 	{
-		JPanel shapes = new JPanel();
-		JPanel color = new JPanel();
-		JPanel move = new JPanel();
-		JTextArea textBox = new JTextArea();
-		
-		textBox.setBorder(new LineBorder(Color.gray, 2));
-		textBox.setEditable(false);
-		
+		JPanel shapePanel = new JPanel();
+		JPanel colorPanel = new JPanel();
+		JPanel movePanel = new JPanel();
 		JButton rect = new JButton("Rect");
 		JButton oval = new JButton("Oval");
 		JButton line = new JButton("Line");
@@ -30,37 +23,31 @@ public class ControlPanel extends JPanel {
 		JButton moveFront = new JButton("Move To Front");
 		JButton moveBack = new JButton("Move To Back");
 		JButton remove = new JButton("Remove Shape");
-		JTextField font = new JTextField();
-		font.setMaximumSize(new Dimension(100, font.getPreferredSize().height));
 		
-		shapes.add(new JLabel("Add"));
-		shapes.add(rect);
-		shapes.add(oval);
-		shapes.add(line);
-		shapes.add(text);
-	
-		color.add(setColor);
-
-		move.add(moveFront);
-		move.add(moveBack);
-		move.add(remove);
+		shapePanel.setLayout(new BoxLayout(shapePanel, BoxLayout.X_AXIS)); 
+		shapePanel.add(new JLabel("Add"));
+		shapePanel.add(rect);
+		shapePanel.add(oval);
+		shapePanel.add(line);
+		shapePanel.add(text);
+		shapePanel.add(Box.createRigidArea(new Dimension(0,50))); // creates white space between the panels.
 		
+		colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.X_AXIS));
+		colorPanel.add(setColor);
+		colorPanel.add(Box.createRigidArea(new Dimension(0,50)));
 		
+		movePanel.setLayout(new BoxLayout(movePanel, BoxLayout.X_AXIS));
+		movePanel.add(moveFront);
+		movePanel.add(moveBack);
+		movePanel.add(remove);
+		movePanel.add(Box.createRigidArea(new Dimension(0,50)));
 		
-		this.add(shapes);
-		this.add(color);
-		this.add(font);
-		this.add(move);
-		this.add(textBox);
-		
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(shapePanel);
+		this.add(colorPanel);
+		this.add(movePanel);
+		for(Component comp: this.getComponents()){
+			((JComponent)comp).setAlignmentX(LEFT_ALIGNMENT); // aligns all the panels to the left margin.
+		}
 	}
-	
-	public void setLeft()
-	{
-		for (Component comp : this.getComponents()) {
-			((JComponent)comp).setAlignmentX(Box.LEFT_ALIGNMENT);
-			}
-	}
-	
-	
 }

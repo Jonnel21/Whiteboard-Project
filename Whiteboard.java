@@ -1,11 +1,11 @@
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
 
 import javax.swing.*;
 
 public class Whiteboard extends JFrame {
 	private JFrame frame; 
 	String title;
-	
 	public Whiteboard(String title)
 	{
 		this.title = title;
@@ -15,7 +15,6 @@ public class Whiteboard extends JFrame {
 	{
 		title = "Whiteboard";
 	}
-	
 	
 	public void run()
 	{
@@ -27,10 +26,8 @@ public class Whiteboard extends JFrame {
 	    frame.add(board, BorderLayout.CENTER);
 	    
 	    ControlPanel controls = new ControlPanel();
-	    controls.setLayout(new BoxLayout(controls, BoxLayout.Y_AXIS));
-	    
 	    frame.add(controls,BorderLayout.WEST);
-
+	    
 	    
 	    frame.pack();
 	    frame.setVisible(true);
